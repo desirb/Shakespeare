@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+    <!-- Head contains metadata on the whole document -->
+    <head>
+        <title>Search Engine</title>
+        
+        <style type="text/css" media="all">
+            html {margin: 0;}
+            body {margin: 0;
+                  font-family: Arial;}
+            h1 {text-align: center;
+                text-shadow: 3px 3px 2px lightgrey;
+                color: black;
+                font-size: 50px;
+            }
+            p {text-align: center;
+               font-size: 18px;
+            }
+            
+            #shakespeare {
+                  width: 5%;
+                  margin-right: 15%;
+                  float: right;
+            }
+            #heading {background-color: lightyellow;
+                      padding: 15px;
+                      border-radius: 5px;
+            }
+            #description, #responseDiv {width: 70%;
+                          margin: auto;
+                          margin-bottom: 2%;
+                          text-align: center;}
+            #inputBox {font-size: 15px;
+                       padding: 6px;
+                       margin-top: 1%;
+                       text-align: center;
+                       border-radius: 6px;}
+            #submitButton {font-size: 15px;
+                           padding: 6px;
+                           border-radius: 6px;}
+            #photo {margin-top: 4%;
+                    margin-bottom: 3%;
+            }
+            
+            .photos {width: 250px;
+                     height: 400px;
+                     margin-left: 6%;
+                     box-shadow: 3px 5px 7px grey;
+                     border-radius: 2px;
+            }
+            
+
+        </style>
+        
+    </head>
+
+
+    <!-- Body contains the page's content -->
+    <body>
+        
+        <!-- header -->
+        <div id="heading">
+            
+            <h1>Works of William Shakespeare Search Engine<img id="shakespeare" src="https://cdn.brainpop.com/english/famousauthorsandbooks/williamshakespeare/icon.png"/></h1>
+        </div>
+        
+                <!-- photos -->
+        <div id="photo">
+                <p>
+                    <img class="photos" src="https://cdn.shopify.com/s/files/1/1524/8284/products/Macbeth.cover-1.jpg?v=1535448729"/>
+                    <img class="photos" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/90cc1091-3247-4c91-bef6-ec0ea8603cdf/d6ss8jt-b7d8c05f-4067-43c6-a024-f805b2e77bd2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvOTBjYzEwOTEtMzI0Ny00YzkxLWJlZjYtZWMwZWE4NjAzY2RmXC9kNnNzOGp0LWI3ZDhjMDVmLTQwNjctNDNjNi1hMDI0LWY4MDViMmU3N2JkMi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.3kBlKn0G8sjU9raTBrhN35supmwyAIJNgaRq5EwkZLc"/>
+                    <img class="photos" src="https://i.pinimg.com/564x/c0/4b/a4/c04ba4fe883387548a73c00aee8a4ae7--shakespeare-theatre-william-shakespeare.jpg"/>
+                </p>
+        </div>
+        
+        <!-- text -->
+        <div id="description">
+            <p>
+                Enter text in the box below and find out if it appears in one of the three works featured on this site.
+            </p>
+            <input type="text" id="inputBox" />
+            <button type="button" id="submitButton"> Submit </button>
+        </div>
+
+        <!-- The div tag creates a named region of the page
+                text -->
+        <div id="responseDiv"></div>
+
+        <!-- script tag contains JavaScript that interacts with page elements -->
+        <script>
+            // Set a listener function for the button click
+            document.getElementById('submitButton').onclick = function () {
+
+                // Get the current string in the text box
+                var input = document.getElementById('inputBox').value;
+
+                // Create and send an HTTP request
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", responseListener);
+                oReq.open("GET", "/search?word=" + input);
+                oReq.send();
+            }
+
+            // Listener runs when the server's response comes back
+            function responseListener() {
+                document.getElementById('responseDiv').innerHTML = this.responseText;
+            }
+        </script>
+    </body>
+</html>
